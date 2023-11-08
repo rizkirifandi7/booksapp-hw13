@@ -58,7 +58,7 @@ export default function BookForm({ bookData }) {
 		<div className="flex items-center justify-center flex-col mt-5">
 			<h1 className="text-2xl font-bold">{bookData ? "Edit Book" : "Create Book"}</h1>
 			<div className="w-1/2">
-				<form onSubmit={handleSubmit} className="mt-4 border p-5 rounded-lg">
+				<form onSubmit={handleSubmit} className="mt-4 mb-4 border p-5 rounded-lg">
 					<div className="mb-2">
 						<label className="block">Title</label>
 						<input name="title" required defaultValue={bookData?.title} className="w-full px-2 py-1 border rounded" />
@@ -114,6 +114,13 @@ export default function BookForm({ bookData }) {
 					)}
 					<button type="submit" className="mt-3 px-4 py-2 font-bold text-white bg-blue-600 rounded hover:bg-blue-700">
 						{bookData ? "Edit Book" : "Create Book"}
+					</button>
+					<button
+						type="button"
+						onClick={() => window.history.back()}
+						className="ml-2 mt-3 px-4 py-2 font-bold text-white bg-red-600 rounded hover:bg-red-700"
+					>
+						Cancel
 					</button>
 				</form>
 				<Modal

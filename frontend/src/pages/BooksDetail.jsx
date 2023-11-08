@@ -40,7 +40,7 @@ export default function BookDetails() {
 	};
 
 	return (
-		<div className="bg-gray-100 min-h-screen p-5">
+		<div className="p-10">
 			{isLoading ? (
 				<div className="h-64 my-6 bg-gray-200 animate-pulse" />
 			) : (
@@ -53,12 +53,20 @@ export default function BookDetails() {
 						/>
 					</div>
 					<div className="mt-4 md:mt-0 md:ml-8">
-						<h1 className="text-2xl font-bold text-gray-700">{book.title}</h1>
-						<p className="mt-2 text-xl font-semibold text-gray-500">Author : {book.author}</p>
-						<p className="mt-1 text-xl font-semibold text-gray-500">Publisher : {book.publisher}</p>
-						<p className="mt-1 text-xl font-semibold text-gray-500">Year : {book.year}</p>
-						<p className="mt-1 text-xl font-semibold text-gray-500">Pages : {book.pages}</p>
-						<p className="mt-1 text-xl font-semibold text-gray-500 mb-4">
+						<div className="flex justify-between items-center">
+							<h1 className="text-3xl font-bold text-gray-700">{book.title}</h1>
+							<button
+								onClick={() => navigate(-1)}
+								className="px-4 py-2 font-bold text-xl text-black hover:text-blue-950"
+							>
+								X
+							</button>
+						</div>
+						<p className="mt-2 text-lg font-semibold text-gray-500">Author : {book.author}</p>
+						<p className="mt-1 text-lg font-semibold text-gray-500">Publisher : {book.publisher}</p>
+						<p className="mt-1 text-lg font-semibold text-gray-500">Year : {book.year}</p>
+						<p className="mt-1 text-lg font-semibold text-gray-500">Pages : {book.pages}</p>
+						<p className="mt-1 text-lg font-semibold text-gray-500 mb-4">
 							Sinopsis : <br></br>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nihil minus cum fugit
 							aperiam eaque saepe obcaecati sit! Quia, sed mollitia.
 						</p>
