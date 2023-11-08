@@ -56,50 +56,62 @@ export default function BookForm({ bookData }) {
 
 	return (
 		<div className="flex items-center justify-center flex-col mt-5">
-			<h1 className="text-2xl font-bold">{bookData ? "Edit Book" : "Create Book"}</h1>
+			<h1 className="text-2xl font-bold text-black">{bookData ? "Edit Book" : "Create Book"}</h1>
 			<div className="w-1/2">
-				<form onSubmit={handleSubmit} className="mt-4 mb-4 border p-5 rounded-lg">
-					<div className="mb-2">
-						<label className="block">Title</label>
-						<input name="title" required defaultValue={bookData?.title} className="w-full px-2 py-1 border rounded" />
+				<form onSubmit={handleSubmit} className="mt-4 mb-4 border p-5 rounded-lg shadow-lg">
+					<div className="mb-4">
+						<label className="block text-gray-700">Title</label>
+						<input
+							name="title"
+							required
+							defaultValue={bookData?.title}
+							className="w-full px-3 py-2 border rounded-md"
+						/>
 					</div>
-					<div className="mb-2">
-						<label className="block">Author</label>
-						<input name="author" required defaultValue={bookData?.author} className="w-full px-2 py-1 border rounded" />
+					<div className="mb-4">
+						<label className="block text-gray-700">Author</label>
+						<input
+							name="author"
+							required
+							defaultValue={bookData?.author}
+							className="w-full px-3 py-2 border rounded-md"
+						/>
 					</div>
-					<div className="mb-2">
-						<label className="block">Publisher</label>
+					<div className="mb-4">
+						<label className="block text-gray-700">Publisher</label>
 						<input
 							name="publisher"
 							required
 							defaultValue={bookData?.publisher}
-							className="w-full px-2 py-1 border rounded"
+							className="w-full px-3 py-2 border rounded-md"
 						/>
 					</div>
-					<div className="mb-2">
-						<label className="block">Year</label>
+					<div className="mb-4">
+						<label className="block text-gray-700">Year</label>
 						<input
 							name="year"
 							type="number"
 							required
 							defaultValue={bookData?.year}
-							className="w-full px-2 py-1 border rounded"
+							className="w-full px-3 py-2 border rounded-md"
 						/>
 					</div>
-					<div className="mb-2">
-						<label className="block">Pages</label>
+					<div className="mb-4">
+						<label className="block text-gray-700">Pages</label>
 						<input
 							name="pages"
 							type="number"
 							required
 							defaultValue={bookData?.pages}
-							className="w-full px-2 py-1 border rounded"
+							className="w-full px-3 py-2 border rounded-md"
 						/>
 					</div>
-					{selectedImage && <img className="w-16" src={selectedImage} alt="Selected Image" />}
+					{selectedImage && (
+						<img className="w-16 h-16 object-cover rounded-full mb-4" src={selectedImage} alt="Selected Image" />
+					)}
 					{!bookData?.image && (
-						<div className="mb-2">
-							<label className="block">Image</label>
+						<div className="mb-4">
+							<label className="block text-gray-700">Image</label>
 							<input
 								name="image"
 								type="file"
@@ -108,11 +120,14 @@ export default function BookForm({ bookData }) {
 									const file = e.target.files[0];
 									setSelectedImage(URL.createObjectURL(file));
 								}}
-								className="w-full px-2 py-1 border rounded"
+								className="w-full px-3 py-2 border rounded-md"
 							/>
 						</div>
 					)}
-					<button type="submit" className="mt-3 px-4 py-2 font-bold text-white bg-blue-600 rounded hover:bg-blue-700">
+					<button
+						type="submit"
+						className="mt-3 px-4 py-2 font-bold text-white bg-blue-600 rounded hover:bg-blue-700"
+					>
 						{bookData ? "Edit Book" : "Create Book"}
 					</button>
 					<button

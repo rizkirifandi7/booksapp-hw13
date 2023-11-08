@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Box, Button, FormControl, FormErrorMessage, FormLabel, Input, Text, useToast } from "@chakra-ui/react";
 import { registerUser } from "../modules/fetch";
 import { useNavigate } from "react-router-dom";
 
@@ -8,7 +7,6 @@ const Register = () => {
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [error, setError] = useState(null);
 	const navigate = useNavigate();
-	const toast = useToast();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -17,82 +15,66 @@ const Register = () => {
 		}
 		try {
 			await registerUser(e.target.name.value, e.target.email.value, password);
-			toast({
-				title: "Registered",
-				description: "You have successfully registered.",
-				status: "success",
-				duration: 3000,
-				isClosable: true,
-			});
 			navigate("/");
 		} catch (e) {
 			const error = new Error(e);
-			toast({
-				title: "An error occurred.",
-				description: error?.message || "An error occurred. Please try again.",
-				status: "error",
-				duration: 3000,
-				isClosable: true,
-			});
+			setError(error?.message || "An error occurred");
 		}
-		setError(error?.message || "An error occurred");
 	};
 
 	return (
-		<Box w={1000} py={5} px={24} mx="auto" mt={8}>
-			<Text fontSize="xl" fontWeight="bold" mb={4}>
-				Register
-			</Text>
+		<div className="w-full max-w-xl mx-auto mt-8 px-6 py-4 bg-white rounded-lg shadow-md">
+			<h2 className="text-2xl font-bold text-center mb-4">Register</h2>
 
-			<Box borderWidth="1px" borderRadius="lg" p={5}>
-				<form onSubmit={handleSubmit}>
-					{error && (
-						<Box color="red.500" mb={4}>
-							{error}
-						</Box>
-					)}
+			{error && <p className="text-red-500 mb-2">{error}</p>}
 
-					<FormControl isRequired mb={3}>
-						<FormLabel>Name</FormLabel>
-						<Input type="name" name="name" placeholder="Enter your mame" />
-					</FormControl>
+			<form onSubmit={handleSubmit} className="space-y-3">
+				<div>
+					<label className="block text-gray-700">Name</label>
+					<input type="name" name="name" placeholder="Enter your name" className="w-full px-3 py-2 border rounded-md" />
+				</div>
 
-					<FormControl isRequired mb={3}>
-						<FormLabel>Email</FormLabel>
-						<Input type="email" name="email" placeholder="Enter your email address" />
-					</FormControl>
+				<div>
+					<label className="block text-gray-700">Email</label>
+					<input
+						type="email"
+						name="email"
+						placeholder="Enter your email address"
+						className="w-full px-3 py-2 border rounded-md"
+					/>
+				</div>
 
-					<FormControl isRequired mb={3}>
-						<FormLabel>Password</FormLabel>
-						<Input
-							type="password"
-							placeholder="Enter a password"
-							value={password}
-							onChange={(e) => setPassword(e.target.value)}
-						/>
-					</FormControl>
+				<div>
+					<label className="block text-gray-700">Password</label>
+					<input
+						type="password"
+						placeholder="Enter a password"
+						value={password}
+						onChange={(e) => setPassword(e.target.value)}
+						className="w-full px-3 py-2 border rounded-md"
+					/>
+				</div>
 
-					<FormControl isRequired mb={3}>
-						<FormLabel>Confirm Password</FormLabel>
-						<Input
-							type="password"
-							placeholder="Confirm your password"
-							value={confirmPassword}
-							onChange={(e) => setConfirmPassword(e.target.value)}
-						/>
-						{password !== confirmPassword && (
-							<Text fontSize="xs" color="red.500">
-								The password does not match
-							</Text>
-						)}
-					</FormControl>
+				<div>
+					<label className="block text-gray-700">Confirm Password</label>
+					<input
+						type="password"
+						placeholder="Confirm your password"
+						value={confirmPassword}
+						onChange={(e) => setConfirmPassword(e.target.value)}
+						className="w-full px-3 py-2 border rounded-md"
+					/>
+					{password !== confirmPassword && <p className="text-xs text-red-500">The password does not match</p>}
+				</div>
 
-					<Button mt={4} colorScheme="teal" type="submit">
-						Register
-					</Button>
-				</form>
-			</Box>
-		</Box>
+				<button
+					type="submit"
+					className="w-full mt-2 px-4 py-2 font-bold text-white bg-blue-500 rounded-lg hover:bg-blue-700"
+				>
+					Register
+				</button>
+			</form>
+		</div>
 	);
 };
 
